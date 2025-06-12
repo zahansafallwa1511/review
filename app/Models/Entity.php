@@ -9,4 +9,14 @@ class Entity extends Model
 {
     /** @use HasFactory<\Database\Factories\EntityFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'rating',
+        'location',
+        'icon',
+        'link',
+        'category_id',
+    ];
+    
 }
