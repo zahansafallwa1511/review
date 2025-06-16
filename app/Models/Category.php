@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Entity;
 
 class Category extends Model
 {
@@ -15,4 +16,8 @@ class Category extends Model
         'slug', 
         'icon'
     ];
+
+    public function entities() {
+        return $this->hasMany(Entity::class);
+    }
 }
