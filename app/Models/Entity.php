@@ -20,9 +20,13 @@ class Entity extends Model
         'name',
         'rating',
         'location',
-        'icon',
+        'image',
         'link',
         'category_id',
+    ];
+
+    protected $casts = [
+        'rating' => 'decimal:1',
     ];
 
     public function category(): BelongsTo 
