@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
@@ -18,7 +19,7 @@ class Review extends Model
     ];
 
     protected $casts = [
-        'review_meta' => 'json',
+        'review_meta' => 'array',
     ];
 
     public function reviewer()
@@ -26,7 +27,7 @@ class Review extends Model
         return $this->belongsTo(Reviewer::class);
     }
 
-    public function entity()
+    public function entity(): BelongsTo
     {
         return $this->belongsTo(Entity::class);
     }

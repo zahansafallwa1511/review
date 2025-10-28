@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('short_review')->nullable();
             $table->string('detail_review')->nullable();
+            $table->integer('rating')->nullable();
             $table->json('review_meta')->nullable();
             $table->foreignId('reviewer_id')->constrained('reviewers');
             $table->foreignId('entity_id')->constrained('entities');

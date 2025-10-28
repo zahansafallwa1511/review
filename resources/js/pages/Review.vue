@@ -58,7 +58,7 @@ const getRating = () => {
     <!-- Image -->
     <div class="w-full md:w-1/3">
       <img
-        src="https://via.placeholder.com/400x400"
+        src="https://d2v5dzhdg4zhx3.cloudfront.net/web-assets/images/storypages/primary/ProductShowcasesampleimages/JPEG/Product+Showcase-1.jpg"
         alt="Product Image"
         class="rounded-xl shadow-md w-full"
       />
@@ -66,9 +66,11 @@ const getRating = () => {
 
     <!-- Details -->
     <div class="w-full md:w-2/3 space-y-4">
-      <h1 class="text-3xl font-bold text-gray-800">Product Title: {{ review.entity.name }}</h1>
+      <h1 class="text-3xl font-bold text-gray-800">{{ review.entity.name }}</h1>
 
       <div class="text-sm text-gray-500">Category: <span class="font-medium text-blue-600">{{ review.entity.category.name }}</span></div>
+      <!-- Date of Review -->
+      <div class="text-xs text-gray-400">Reviewed on: May 29, 2025</div>
 
       <!-- Tags -->
       <div class="flex flex-wrap gap-2">
@@ -79,9 +81,9 @@ const getRating = () => {
         >
             {{ tag.name }}
         </span>
-        <span class="bg-gray-100 text-sm text-gray-700 px-3 py-1 rounded-full">Smartphone</span>
-        <span class="bg-gray-100 text-sm text-gray-700 px-3 py-1 rounded-full">Android</span>
-        <span class="bg-gray-100 text-sm text-gray-700 px-3 py-1 rounded-full">5G</span>
+        <span class="bg-gray-100 text-sm text-gray-700 px-3 py-1 border-1 border-black rounded-full">Smartphone</span>
+        <span class="bg-gray-100 text-sm text-gray-700 px-3 py-1 border-1 border-black rounded-full">Android</span>
+        <span class="bg-gray-100 text-sm text-gray-700 px-3 py-1 border-1 border-black rounded-full">5G</span>
       </div>
 
       <!-- Rating -->
@@ -116,8 +118,7 @@ const getRating = () => {
         {{ review.short_review }}
       </p>
 
-      <!-- Date of Review -->
-      <div class="text-xs text-gray-400">Reviewed on: May 29, 2025</div>
+
     </div>
   </div>
 
@@ -132,38 +133,42 @@ const getRating = () => {
     </p>
   </div>
 
-  <!-- Related Products -->
-  <div class="mt-12">
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">Related Products</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition">
-        <img src="https://via.placeholder.com/300x200" alt="Related 1" class="rounded mb-2" />
-        <h3 class="text-lg font-semibold text-gray-700">Related Product 1</h3>
-        <p class="text-sm text-gray-500">Category: Accessories</p>
-      </div>
-      <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition">
-        <img src="https://via.placeholder.com/300x200" alt="Related 2" class="rounded mb-2" />
-        <h3 class="text-lg font-semibold text-gray-700">Related Product 2</h3>
-        <p class="text-sm text-gray-500">Category: Gadgets</p>
-      </div>
-      <div class="border rounded-lg p-4 shadow-sm hover:shadow-md transition">
-        <img src="https://via.placeholder.com/300x200" alt="Related 3" class="rounded mb-2" />
-        <h3 class="text-lg font-semibold text-gray-700">Related Product 3</h3>
-        <p class="text-sm text-gray-500">Category: Devices</p>
+  <!-- Review Metadata -->
+  <div v-if="review.review_meta && Object.keys(review.review_meta).length > 0" class="mt-8">
+  <h2 class="text-xl font-semibold text-gray-800 mb-4">Detailed Ratings</h2>
+  <div class="bg-gray-50 rounded-lg p-4">
+    <div v-for="(value, key) in review.review_meta" :key="key" class="mb-4">
+      <span class="font-medium text-gray-700">{{ key }}:</span>
+      <div class="inline-flex items-center ml-2">
+        <!-- Stars -->
+        <svg
+          v-for="n in 5"
+          :key="n"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-5 h-5"
+          :class="[
+            n <= Number(value)
+              ? Number(value) >= 4
+                ? 'text-green-500'
+                : Number(value) >= 3
+                  ? 'text-yellow-500'
+                  : 'text-red-500'
+              : 'text-gray-300'
+          ]"
+        >
+          <path
+            d="M12 .587l3.668 7.568L24 9.75l-6 5.847 1.417 8.269L12 19.896l-7.417 3.97L6 15.597 0 9.75l8.332-1.595z"
+          />
+        </svg>
+        <!-- Numeric rating (optional) -->
+        <span class="ml-2 text-sm text-gray-600">({{ value }}/5)</span>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Review Metadata -->
-  <div v-if="review.review_meta && Object.keys(review.review_meta).length > 0" class="mt-8">
-      <h2 class="text-xl font-semibold text-gray-800 mb-4">Additional Information</h2>
-      <div class="bg-gray-50 rounded-lg p-4">
-          <div v-for="(value, key) in review.review_meta" :key="key" class="mb-2">
-              <span class="font-medium text-gray-700">{{ key }}:</span>
-              <span class="text-gray-600 ml-2">{{ value }}</span>
-          </div>
-      </div>
-  </div>
 </div>
 
     </AppLayout>

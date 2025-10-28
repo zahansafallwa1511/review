@@ -21,9 +21,13 @@ class ReviewFactory extends Factory
         return [
             'short_review' => fake()->sentence(),
             'detail_review' => fake()->paragraph(),
-            'review_meta' => json_encode([]),
+            'review_meta' => [
+                'comfort' => fake()->randomFloat(1, 0, 5),
+                'longevity' => fake()->randomFloat(1, 0, 5)
+            ],
             'reviewer_id' => Reviewer::factory(),
             'entity_id' => Entity::factory(),
+            'rating' => fake()->randomFloat(1, 0, 5),
         ];
     }
 }

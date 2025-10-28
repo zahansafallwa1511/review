@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,3 +18,4 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/review/{id}', [ReviewController::class, "show"]);
+Route::get('/categories/{id}', [CategoryController::class, "show"]);

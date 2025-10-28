@@ -1,36 +1,34 @@
-<script setup lang="ts"></script>
-
 <template>
-    <header class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+    <header class="bg-white shadow-xl px-4 py-3 flex items-center justify-between">
+        <!-- Left: Logo and Search -->
+        <div class="flex items-center space-x-4 flex-1">
+            <!-- Logo -->
+            <img src="/logo.svg" alt="Logo" class="h-8 w-auto" />
 
-                <!-- Left: Logo & Menu -->
-                <div class="flex items-center space-x-6">
-                    <a href="#" class="text-xl font-bold text-gray-800">MyBrand</a>
-                    <nav class="hidden md:flex space-x-4 text-gray-600 font-medium">
-                        <a href="#" class="hover:text-gray-900">Home</a>
-                        <a href="#" class="hover:text-gray-900">About</a>
-                        <a href="#" class="hover:text-gray-900">Services</a>
-                        <a href="#" class="hover:text-gray-900">Contact</a>
-                    </nav>
-                </div>
-
-                <!-- Center: Search Bar -->
-                <div class="flex-1 mx-6 hidden md:flex">
-                    <input type="text" placeholder="Search..."
-                        class="w-full px-4 py-2 border rounded-full border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                <!-- Right: Button -->
-                <div class="flex items-center space-x-4">
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full transition">
-                        Sign In
-                    </button>
-                </div>
-
+            <!-- Search Bar -->
+            <div class="relative w-full max-w-sm">
+                <input
+                    v-model="searchQuery"
+                    type="text"
+                    placeholder="Search..."
+                    class="w-full rounded-full py-2 pl-4 pr-12 text-sm bg-[#EFF3F6] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
             </div>
         </div>
-    </header>
 
+        <!-- Right: Icons -->
+        <div class="flex items-center space-x-4 text-[#1C1C1C]">
+            <BellIcon class="h-6 w-6" />
+            <UserIcon class="h-6 w-6" />
+            <Cog6ToothIcon class="h-6 w-6" />
+        </div>
+    </header>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+const searchQuery = ref('')
+
+import { MagnifyingGlassIcon, BellIcon, UserIcon, Cog6ToothIcon } from '@heroicons/vue/24/outline';
+</script>
